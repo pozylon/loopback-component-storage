@@ -9,7 +9,7 @@
     "keyId": "your-amazon-key-id"
   },
   "swisscom": {
-    "key": "your-access-key",
-    "keyId": "your-secret-key"
+    "key": "your-secret-key",
+    "keyId": "your-access-key"
   }
 }
