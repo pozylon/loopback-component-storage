@@ -17,30 +17,16 @@ function listContainersAndFiles(ss) {
     containers.forEach(function (c) {
       console.log('[%s] %s/', ss.provider, c.name);
       c.getFiles(function (err, files) {
-        files.forEach(function (f) {
-          console.log('[%s] ... %s', ss.provider, f.name);
-        });
+      	if (files) {
+      	  files.forEach(function (f) {
+          	console.log('[%s] ... %s', ss.provider, f.name);
+          });
+      	}
       });
     });
   });
 }
 
-var rs = new StorageService({
-  provider: 'rackspace',
-  username: providers.rackspace.username,
-  apiKey: providers.rackspace.apiKey,
-  region: providers.rackspace.region
-});
-
-listContainersAndFiles(rs);
-
-var s3 = new StorageService({
-  provider: 'amazon',
-  key: providers.amazon.key,
-  keyId: providers.amazon.keyId
-});
-
-listContainersAndFiles(s3);
 
 var scs = new StorageService({ // amazon s3 equivalent, with different endpoints
   provider: 'swisscom',
@@ -53,7 +39,7 @@ listContainersAndFiles(scs);
 
 var fs = require('fs');
 var path = require('path');
-var stream = s3.uploadStream('con1', 'test.jpg');
+var stream = scs.uploadStream('con1', 'test.jpg');
 fs.createReadStream(path.join(__dirname, 'test.jpg')).pipe(stream);
 
 var local = StorageService({
