@@ -42,6 +42,14 @@ var s3 = new StorageService({
 
 listContainersAndFiles(s3);
 
+var scs = new StorageService({ // amazon s3 equivalent, with different endpoints
+  provider: 'swisscom',
+  key: providers.swisscom.key,
+  keyId: providers.swisscom.keyId
+});
+
+listContainersAndFiles(scs);
+
 
 var fs = require('fs');
 var path = require('path');
